@@ -1,0 +1,17 @@
+<!-- <button onClick={setTasklist([...tasklist, formInput])}>
+    {buttonText}
+</button>
+
+WHY DOES THIS BUTTON CODE MAKE EVERYTHING WHITE AND DISABLE JAVA SCRIPT:!?!?!?!?!?!?!?!/
+
+
+
+and why the form tag below not working
+
+<div>
+    <form>
+        <input onChange={handleChange} placeholder={placeholderText} />
+        <button onClick={addTask}>{buttonText}</button>
+    </form>
+    
+</div> --> <--- commented out stuff has been solved :)
