@@ -1,69 +1,63 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 
 function RecipeIndex(props) {
   const { recipesMade } = props;
- 
+  const [allRecipesObjectArray, setAllRecipesObjectArray] = useState([]);
 
-
-  const [allRecipesObjectArray, setAllRecipesObjectArray] = useState([])
-
-  function getRecipes(){
-    axios
-      .get("/api/version1/recipes")
-        .then(function (response) {
-          setAllRecipesObjectArray(response.data);
-          console.log(response.data);
-        })
-          .catch(function (error) {
-            console.log(error);
-          });
+  async function getRecipes() {
+    try {
+      const response = await axios.get('/api/version1/recipes');
+      setAllRecipesObjectArray(response.data);
+    } catch (error) {
+      // console.log(error)
     }
-
-  useEffect(function(){getRecipes()}, [recipesMade])
-
-
-  //it is stupid how i need to start the below fucntion with a capital letter to call it inthe recipe index return but thats react ok
-  function ListAllRecipesObjectArray(){
-    function ListArray(arr){
-      return(
-          arr.map((item) => {
-            return (<div>{item}</div>)
-          })
-      )
-    }
-    
-    const mapping = allRecipesObjectArray.map((object) => {
-      return (
-        <>
-          <div className={"recipe" + object.id.toString()}>
-            {/* className=`recipe{object.id}` */}
-            id: {object.id} <br />
-            title: {object.title} <br />
-            instructions: {ListArray(object.instructions)} <br />
-            ingredients: {ListArray(object.ingredients)} <br />
-            created_at: {object.created_at} <br />
-          </div>
-        </>
-      );
-    });
-    return mapping // IDK HOW THIS WORKS INTUITIVELY, IS THIS AN ARRAY OF <></> ELEMENTS???
   }
-  //
 
+  useEffect(() => { getRecipes(); }, [recipesMade]);
 
-
-
-  //
-
-  
-  
+  function ListAllRecipesObjectArray() {
+    function ListArray(arr) {
+      return (
+        arr.map((item) => (<li>{item}</li>))
+      );
+    }
+    function handleViewRecipeClick(recipeObject) {
+      console.log(recipeObject);
+    }
+    const mapping = allRecipesObjectArray.map((recipeObject) => (
+      <>
+        <div className={`recipe${recipeObject.id.toString()}`}>
+          id:
+          {recipeObject.id}
+          <br />
+          title:
+          {recipeObject.title}
+          <br />
+          ingredients:
+          <ul>{ListArray(recipeObject.ingredients)}</ul>
+          <br />
+          instructions:
+          <ol>{ListArray(recipeObject.instructions)}</ol>
+          <br />
+          created_at:
+          {recipeObject.created_at}
+          <br />
+        </div>
+        <button type="button" onClick={() => { handleViewRecipeClick(recipeObject); }}>Expand Recipe</button>
+      </>
+    ));
+    return mapping; // IDK HOW THIS WORKS INTUITIVELY, IS THIS AN ARRAY OF <></> ELEMENTS???
+  }
 
   return (
-      <ListAllRecipesObjectArray/>
+    <ListAllRecipesObjectArray />
   );
-
-  
 }
 
-export default RecipeIndex
+RecipeIndex.propTypes = {
+  recipesMade: PropTypes.number.isRequired,
+};
+
+export default RecipeIndex;

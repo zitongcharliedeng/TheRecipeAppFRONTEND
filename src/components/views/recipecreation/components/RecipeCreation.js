@@ -1,17 +1,17 @@
-import axios from "axios";
-import { useState } from "react";
+import axios from 'axios';
+import { useState, React } from 'react';
+import PropTypes from 'prop-types';
 
-
-export function RecipeCreation(props) {
+function RecipeCreation(props) {
   const { recipesMade, setRecipesMade } = props;
 
   //   RECIPE CREATION PROPS
-  const [recipeTitleFormInput, setRecipeTitleFormInput] = useState("");
+  const [recipeTitleFormInput, setRecipeTitleFormInput] = useState('');
   function handleRecipeTitleFormInputChange(event) {
     setRecipeTitleFormInput(event.target.value);
   }
 
-  //const [Cover image, setCover image] = useState(undefined????);
+  // const [Cover image, setCover image] = useState(undefined????);
 
   //
   const [ingredientsListFormInput, setIngredientsListFormInput] = useState([]);
@@ -21,11 +21,11 @@ export function RecipeCreation(props) {
   }
   function handleIngredientsListFormInputClick() {
     setIngredientsList(
-      ingredientsListFormInput !== ""
+      ingredientsListFormInput !== ''
         ? [...ingredientsList, ingredientsListFormInput]
-        : ingredientsList
+        : ingredientsList,
     );
-    setIngredientsListFormInput("");
+    setIngredientsListFormInput('');
   }
 
   //
@@ -36,45 +36,33 @@ export function RecipeCreation(props) {
   }
   function handleInstructionsListFormInputClick() {
     setInstructionsList(
-      instructionsListFormInput !== ""
+      instructionsListFormInput !== ''
         ? [...instructionsList, instructionsListFormInput]
-        : instructionsList
+        : instructionsList,
     );
-    setInstructionsListFormInput("");
+    setInstructionsListFormInput('');
   }
 
   //
   async function handleCreateRecipeClick() {
-
-      //I NEED TO TURN THE LISTS OF INSTRUCTIONS AND INGREDIENTS INTO ONE LONG STRING SINCE SQL ACTIVE RECORD DATA TYPE IS STRING/TEXT, ARRAY NOT A DATA TYPE
-
-
-
-
-
-
     try {
-      const response = await axios.post("/api/version1/recipes", {
-      title: recipeTitleFormInput,
-      instructionsarray: instructionsList,
-      ingredientsarray: ingredientsList,
-      })
-      console.log(response)
-    } catch(error) {
-      console.log(error)
+      await axios.post('/api/version1/recipes', {
+        title: recipeTitleFormInput,
+        instructionsarray: instructionsList,
+        ingredientsarray: ingredientsList,
+      });
+    } catch (error) {
+      // console.log(error);
     }
-    setRecipesMade(recipesMade + 1)
+    setRecipesMade(recipesMade + 1);
   }
 
   function listStrings(arr) {
-    return arr.map((x) => {
-      return <div>{x}</div>;
-    });
+    return arr.map((x) => <div>{x}</div>);
   }
 
   return (
     <div className="RecipeCreation">
-
 
       <div className="formInputs">
         <div className="recipeTitleFormInput">
@@ -90,7 +78,7 @@ export function RecipeCreation(props) {
             onChange={handleIngredientsListFormInputChange}
             value={ingredientsListFormInput}
           />
-          <button onClick={handleIngredientsListFormInputClick}>Add</button>
+          <button type="button" onClick={handleIngredientsListFormInputClick}>Add</button>
         </div>
         <div className="instructionsListFormInput">
           <input
@@ -98,27 +86,37 @@ export function RecipeCreation(props) {
             onChange={handleInstructionsListFormInputChange}
             value={instructionsListFormInput}
           />
-          <button onClick={handleInstructionsListFormInputClick}>Add</button>
+          <button type="button" onClick={handleInstructionsListFormInputClick}>Add</button>
         </div>
       </div>
-
 
       <h1>RECIPE PREVIEW:</h1>
 
       <div className="recipe-preview">
-        Recipe: {recipeTitleFormInput}
+        Recipe:
+        {' '}
+        {recipeTitleFormInput}
         <br />
-        Ingredients: {listStrings(ingredientsList)}
+        Ingredients:
+        {' '}
+        {listStrings(ingredientsList)}
         <br />
-        Instructions: {listStrings(instructionsList)}
+        Instructions:
+        {' '}
+        {listStrings(instructionsList)}
       </div>
 
       <div className="Create Recipe">
-        <button onClick={handleCreateRecipeClick}>Create Recipe!</button>
+        <button type="submit" onClick={handleCreateRecipeClick}>Create Recipe!</button>
       </div>
-
 
     </div>
   );
 }
 
+RecipeCreation.propTypes = {
+  recipesMade: PropTypes.number.isRequired,
+  setRecipesMade: PropTypes.func.isRequired,
+};
+
+export default RecipeCreation;
