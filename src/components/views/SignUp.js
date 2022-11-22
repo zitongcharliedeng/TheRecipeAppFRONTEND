@@ -9,7 +9,7 @@ function SignUp() {
 
   async function handleSignUpClick() {
     try {
-      const response = await axios.post('/api/version1/users', {
+      const response = await axios.post('/users', {
         username: usernameFormInput,
         drowssap: passwordFormInput,
       });

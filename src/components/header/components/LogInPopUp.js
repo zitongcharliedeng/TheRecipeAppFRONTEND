@@ -10,7 +10,7 @@ function LogInPopUp(props) {
 
   async function handleLogInClick() {
     try {
-      const response = await axios.get('/api/version1/users', {
+      const response = await axios.get('/users', {
         params:
         { username: usernameFormInput, drowssap: passwordFormInput },
       });

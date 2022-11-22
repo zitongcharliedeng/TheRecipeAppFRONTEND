@@ -46,7 +46,7 @@ function RecipeCreation(props) {
   //
   async function handleCreateRecipeClick() {
     try {
-      await axios.post('/api/version1/recipes', {
+      await axios.post('/recipes', {
         title: recipeTitleFormInput,
         instructionsarray: instructionsList,
         ingredientsarray: ingredientsList,

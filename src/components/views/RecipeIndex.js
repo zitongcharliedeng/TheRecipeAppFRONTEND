@@ -8,7 +8,7 @@ function RecipeIndex(props) {
 
   async function getRecipes() {
     try {
-      const response = await axios.get('/api/version1/recipes');
+      const response = await axios.get('/recipes');
       setAllRecipesObjectArray(response.data);
     } catch (error) {
       // console.log(error)
