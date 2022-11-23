@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import RecipeCreation from './components/views/recipecreation/components/RecipeCreation';
 import Home from './components/views/Home';
 import RecipeIndex from './components/views/RecipeIndex';
@@ -7,6 +8,8 @@ import Header from './components/header/Header';
 import './styles/App.css';
 
 function App() {
+  axios.defaults.baseURL = 'https://the-recipe-app-backend.herokuapp.com/api/version1'; // for production only, proxy used for development address
+
   const [sessionId, setSessionId] = useState(0);
   const [recipesMade, setRecipesMade] = useState(0);
 

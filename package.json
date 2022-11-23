@@ -1,6 +1,6 @@
 { "homepage": ".",
   "name": "therecipeappfrontend",
-  "proxy": "https://the-recipe-app-backend.herokuapp.com/api/version1",
+  "proxy": "localhost:3000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
