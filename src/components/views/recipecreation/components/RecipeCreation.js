@@ -62,7 +62,7 @@ function RecipeCreation(props) {
   }
 
   return (
-    <div className="RecipeCreation">
+    <div className="recipecreationview">
 
       <div className="formInputs">
         <div className="recipeTitleFormInput">

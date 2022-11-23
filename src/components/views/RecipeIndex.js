@@ -27,7 +27,7 @@ function RecipeIndex(props) {
       console.log(recipeObject);
     }
     const mapping = allRecipesObjectArray.map((recipeObject) => (
-      <>
+      <div className="recipeindexview">
         <div className={`recipe${recipeObject.id.toString()}`}>
           id:
           {recipeObject.id}
@@ -46,7 +46,7 @@ function RecipeIndex(props) {
           <br />
         </div>
         <button type="button" onClick={() => { handleViewRecipeClick(recipeObject); }}>Expand Recipe</button>
-      </>
+      </div>
     ));
     return mapping; // IDK HOW THIS WORKS INTUITIVELY, IS THIS AN ARRAY OF <></> ELEMENTS???
   }

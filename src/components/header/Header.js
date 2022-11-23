@@ -43,28 +43,30 @@ function Header(props) {
   //
 
   return (
-    <div>
-      This is the header.
-      <button type="button" onClick={handleHomePageClick}>Home Page</button>
-      <button type="button" onClick={handleRecipeCreationPageClick}>
-        Recipe Creation Page
-      </button>
-      <button type="button" onClick={handleRecipeIndexPageClick}>Recipe Index</button>
-      Current Page View:
-      {url}
-      |
+    <div className="header">
+      <div className="navlinks">
+        <button type="button" onClick={handleHomePageClick}>Home Page</button>
+        <button type="button" onClick={handleRecipeCreationPageClick}>
+          Recipe Creation Page
+        </button>
+        <button type="button" onClick={handleRecipeIndexPageClick}>Recipe Index</button>
+      </div>
+      <div className="currentpageview">
+        Current Page View:
+        {url}
+      </div>
       {sessionId === 0 ? (
-        <>
+        <div className="signedoutbox">
           <button type="button" onClick={handleSignUpPageClick}>Sign up here!</button>
           <button type="button" onClick={handleLogInPopUpClick}>Or log in here!</button>
-        </>
+          {logInPopUp.html}
+        </div>
       ) : (
-        <>
+        <div className="signedinbox">
           {`Signed in as id: ${sessionId}`}
-          <button type="button" onClick={handleLogOutClick}>Or log out here!</button>
-        </>
+          <button type="button" onClick={handleLogOutClick}>Log out</button>
+        </div>
       )}
-      {logInPopUp.html}
     </div>
   );
 }

@@ -29,7 +29,7 @@ function SignUp() {
   }
 
   return (
-    <div className="SignUp">
+    <div className="signupview">
       <h1>SIGN UP HERE:</h1>
       <div className="usernameFormInput">
         <input

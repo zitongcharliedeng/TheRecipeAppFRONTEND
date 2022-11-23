@@ -4,6 +4,7 @@ import Home from './components/views/Home';
 import RecipeIndex from './components/views/RecipeIndex';
 import SignUp from './components/views/SignUp';
 import Header from './components/header/Header';
+import './styles/App.css';
 
 function App() {
   const [sessionId, setSessionId] = useState(0);
@@ -23,7 +24,7 @@ function App() {
         setRecipesMade={setRecipesMade}
       />
     ) : (
-      <>Must be logged in to create a recipe!</>
+      <div className="recipecreationview">Must be logged in to create a recipe!</div>
     );
   } else if (url === 'RecipeIndex') {
     page = <RecipeIndex recipesMade={recipesMade} />;
@@ -36,7 +37,7 @@ function App() {
   return (
     <div className="top-level-component">
       <Header url={url} setUrl={setUrl} sessionId={sessionId} setSessionId={setSessionId} />
-      {page}
+      <div className="page">{page}</div>
     </div>
   );
 }

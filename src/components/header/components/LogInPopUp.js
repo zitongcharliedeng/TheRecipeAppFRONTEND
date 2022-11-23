@@ -36,8 +36,8 @@ function LogInPopUp(props) {
   }
 
   return (
-    <>
-      <h1>LOGIN IN HERE:</h1>
+    <div className="loginbox">
+      LOGIN IN HERE:
       <div className="usernameFormInput">
         <input
           placeholder="Enter username"
@@ -56,7 +56,7 @@ function LogInPopUp(props) {
 
       <br />
       {flash}
-    </>
+    </div>
   );
 }
 
